@@ -5,7 +5,7 @@ class grid {
         this.height = height;
         this.cells = cells;
     }
-    buildGrid() {
+    buildGrid() { // creates a 2D array of cell objects based on the width and height of the grid (given by user input)
 
     }
     getCell(x, y) {
