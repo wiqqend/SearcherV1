@@ -1,15 +1,22 @@
 
-class grid {
+class Grid {
     constructor(width, height, cells=[[]]) {
         this.width = width;
         this.height = height;
         this.cells = cells;
     }
-    buildGrid() { // creates a 2D array of cell objects based on the width and height of the grid (given by user input)
-
+    buildGrid() { // creates a table of cell objects based on the width and height of the grid (given by user input)
+        this.cells = [];
+        for (let i = 0; i < this.height; i++) {
+            let row = [];
+            for (let j = 0; j < this.width; j++) {
+                row.push(new Cell(j, i));
+            }
+            this.cells.push(row);
+        }
     }
     getCell(x, y) {
-
+        return this.cells[y][x];
     }
     resetGrid() {
 
@@ -19,7 +26,7 @@ class grid {
     }
 }
 
-class cell{
+class Cell{
     constructor(x, y, isWall=false, isStart=false, isEnd=false, isVisited=false,ispath=false) {
         this.x = x;
         this.y = y;
@@ -102,3 +109,5 @@ class UI {
 
     }
 }
+
+Grid.buildGrid();
