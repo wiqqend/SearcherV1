@@ -38,17 +38,67 @@ class cell{
     }
 }
 class searchAlgorithm{
+    constructor(grid, startCell, goalCell, visited=[], queue=[]) {
+        this.grid = grid;
+        this.startCell = startCell;
+        this.goalCell = goalCell;
+        this.visited = visited;
+        this.queue = queue;
+    }
 
+    run() {
+
+    }
+
+    newpath(goalCell) {
+
+    }
+
+    newGoal(goalCell) {
+
+    }
 
 }
 
 
 class BFS extends searchAlgorithm{
+    constructor(queue = []) {
+        super(queue);
+    }
+    pathfindingBFS() {
 
+    }
+    newpath(goalCell) {
 
+    }
 }
-
 class UI {
+    constructor(grid, algorithm, selectedAlgorithm) {
+        this.grid = grid;
+        this.algorithm = algorithm;
+        this.selectedAlgorithm = selectedAlgorithm;
+    }
+    readInput() {
 
+    }
 
+    makegrid() {
+
+    }
+
+    cleargridwalls() {
+
+    }
+
+    addwalls(x,y) {
+    
+    }
+
+    startalgorithm() {
+
+    }
+
+    createPath(goalCell) {
+
+    }
 }
