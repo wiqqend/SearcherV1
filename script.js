@@ -1,4 +1,6 @@
 
+
+
 class Grid {
     constructor(width, height, cells=[[]]) {
         this.width = width;
@@ -6,17 +8,21 @@ class Grid {
         this.cells = cells;
     }
     buildGrid() { // creates a table of cell objects based on the width and height of the grid (given by user input)
-        this.cells = [];
-        for (let i = 0; i < this.height; i++) {
+        var height = this.height;
+        var width = this.width;
+        var cells = [];
+        for (let i = 0; i < height; i++) {
             let row = [];
-            for (let j = 0; j < this.width; j++) {
+            for (let j = 0; j < width; j++) {
                 row.push(new Cell(j, i));
             }
-            this.cells.push(row);
+            cells.push(row);
         }
+        this.cells = cells;
+
     }
     getCell(x, y) {
-        return this.cells[y][x];
+
     }
     resetGrid() {
 
