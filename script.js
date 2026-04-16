@@ -100,10 +100,10 @@ class BFS extends searchAlgorithm{
     }
 }
 class UI {
-    constructor(grid, algorithm, selectedAlgorithm) {
-        this.grid = grid;
-        this.algorithm = algorithm;
-        this.selectedAlgorithm = selectedAlgorithm;
+    constructor() {
+        this.grid = null;
+        this.tableElement = document.getElementById("grid");
+        this.statusElement = document.getElementById("status");
     }
     readInput() {
 
