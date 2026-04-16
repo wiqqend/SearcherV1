@@ -27,9 +27,16 @@ class Grid {
     }
     
     getneighbors(cell) {
-        return [[0,-1] [0,1],[-1,0],[1,0]].map((dx,dy)) => this.getCell(cell.x+dx, cell.y+dy)).filter(neighbor => neighbor && !neighbor.isWall);
+        return [[0,-1] [0,1],[-1,0],[1,0]].map((dx,dy) => this.getCell(cell.x+dx, cell.y+dy)).filter(neighbor => neighbor && !neighbor.isWall);
+    }
+    reset() {
+        this.cells.flat().forEach(cell => cell.reset());
+        
+    }
+    clearWalls() {
+        this.cells.flat().forEach(cell => {cell.isWall = false;});
+    }
 }
-
 class Cell{
     constructor(x, y) {
         this.x = x;
