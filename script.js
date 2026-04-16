@@ -33,21 +33,30 @@ class Grid {
 }
 
 class Cell{
-    constructor(x, y, isWall=false, isStart=false, isEnd=false, isVisited=false,ispath=false) {
+    constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.isWall = isWall;
-        this.isStart = isStart;
-        this.isEnd = isEnd;
-        this.isVisited = isVisited;
-        this.isPath = ispath;
+        this.isWall = false;
+        this.isStart = false;
+        this.isGoal = false;
+        this.isVisited = false;
+        this.isPath = false;
+        this.parent = null;
+        this.g = 0;
+        this.h= 0;
+
     }
     toggleWall() {
-
-    }
+        if (!this.isStart && !this.isGoal) 
+            this.isWall = !this.isWall;}
+    
     
     reset(){
-
+        this.isVisited = false;
+        this.isPath = false;
+        this.parent = null;
+        this.g = 0;
+        this.h = 0;
     }
 }
 class searchAlgorithm{

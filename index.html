@@ -11,25 +11,24 @@
     <div id="header">
         <h1>Search by Algorithm</h1>
     </div>
-    <div id="userInputs">
-        <p>Width of grid: <input type="number" id="width" placeholder="Width of grid"></p>
-        <p>Height of grid: <input type="number" id="height" placeholder="Height of grid"></p>
-        <p>Start X: <input type="number" id="startX" placeholder="Start X"></p>
-        <p>Start Y: <input type="number" id="startY" placeholder="Start Y"></p>
-        <p>Goal X: <input type="number" id="goalX" placeholder="Goal X"></p>
-        <p>Goal Y: <input type="number" id="goalY" placeholder="Goal Y"></p>
-        <div id="algorithmSelection">
-            <p>
-                Select Algorithm:
-                <input type="radio" id="bfs" name="algorithm" value="BFS">
-                <label for="bfs">BFS</label>
-            </p>
-        </div>
+    <div id="controls">
+        <label>Width: <input type="number" id="width" value="10" min="2"></label>
+        <label>Height: <input type="number" id="gridHeight" value="10" min="2"></label>
+        <label>StartX: <input type="number" id="startX" value="0" min="0"></label>
+        <label>StartY: <input type="number" id="startY" value="0" min="0"></label>
+        <label>GoalX: <input type="number" id="goalX" value="0" min="0"></label>
+        <label>GoalY: <input type="number" id="goalY" value="0" min="0"></label>
+        
+        <fieldset>
+            <legend>Select Algorithm:</legend>
+            <input type="radio" id="bfs" name="algorithm" value="BFS">
+            <label for="bfs">BFS</label>
+        </fieldset>
 
 
         <div id="buttons">
-            <button id="clearWalls">Clear Walls</button>
-            <button id="startAlgorithm">Start Algorithm</button>
+            <button onclick="UI.clearGridWalls()">Clear Walls</button>
+            <button onclick="UI.startAlgorithm()">Start Algorithm</button>
         </div>
     
     </div>
