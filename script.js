@@ -143,8 +143,22 @@ class UIController {
         if (sx === gx && sy === gy) 
             return;
 
-
+        this.grid.getCell(sx, sy).isStart = true;
+        this.grid.getCell(gx, gy).isGoal  = true;
+        this.renderGrid();    
     }
+    renderGrid(){
+        this.tableEl.innerHTML = '';    
+        for (let y = 0; y < this.grid.height; y++) {
+            const row = document.createElement('tr');
+        for (let x = 0; x < this.grid.width; x++) {
+            const td = document.createElement('td');
+            this.applyClass(td, this.grid.getCell(x, y));
+            td.dataset.x = x;
+            td.dataset.y = y;
+            
+    }
+}}
 
     cleargridwalls() {
 
