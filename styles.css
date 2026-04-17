@@ -14,3 +14,54 @@ td.start   { background: yellow; }
 td.goal    { background: red; }
 td.visited { background: lightcyan; }
 td.path    { background: green; }
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+ 
+p {
+  margin: 4px 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 220px;
+}
+ 
+.controls label {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+ 
+.controls input[type=number] {
+  width: 100px;
+}
+ 
+.algo-box {
+  border: 1px solid #aaa;
+  padding: 6px;
+  margin: 4px 0;
+}
+ 
+.algo-box legend {
+  font-size: 13px;
+}
+ 
+button {
+  width: 100%;
+  padding: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 2px;
+}
