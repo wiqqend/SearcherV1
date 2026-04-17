@@ -9,36 +9,45 @@ class Grid {
         this.buildGrid();
     }
     buildGrid() {
-    this.cells = [];
-    
-    for (let y = 0; y < this.height; y++) {
-        this.cells[y] = [];
+        this.cells = [];
         
-        for (let x = 0; x < this.width; x++) {
-            this.cells[y][x] = new Cell(x, y);
+        for (let y = 0; y < this.height; y++) {
+            this.cells[y] = [];
+            
+            for (let x = 0; x < this.width; x++) {
+                this.cells[y][x] = new Cell(x, y);
+                }
             }
-        }
     }
     getCell(x, y) {
-        if (x<0 || x>= this.width || y<0 || y>= this.height) 
+        if (x < 0 || x >= this.width || y < 0 || y >= this.height) 
             return null;
         return this.cells[y][x];
-    }
-    reset() {
-        this.cells.flat().forEach(cell => cell.reset());
-    }
+  }
     
-    getneighbors(cell) {
-        return [[0,-1] [0,1],[-1,0],[1,0]].map((dx,dy) => this.getCell(cell.x+dx, cell.y+dy)).filter(neighbor => neighbor && !neighbor.isWall);
-    }
-    reset() {
-        this.cells.flat().forEach(cell => cell.reset());
+    getNeighbors(cell) {
+        const dirs = [[0,-1],[0,1],[-1,0],[1,0]];
+        const neighbors = [];
+        for (let i = 0; i < dirs.length; i++) {
+            const neighbor = this.getCell(cell.x + dirs[i][0], cell.y + dirs[i][1]);
         
+            if (neighbor && !neighbor.isWall) 
+            neighbors.push(neighbor);
+    }
+    return neighbors;
+  }
+    reset() {
+        for (let y = 0; y < this.height; y++)
+            for (let x = 0; x < this.width; x++)
+                this.cells[y][x].reset();
     }
     clearWalls() {
-        this.cells.flat().forEach(cell => {cell.isWall = false;});
+        for (let y = 0; y < this.height; y++)
+            for (let x = 0; x < this.width; x++)
+                this.cells[y][x].isWall = false;
     }
 }
+
 class Cell {
   constructor(x, y) {
     this.x = x;
@@ -98,11 +107,10 @@ class BFS extends searchAlgorithm{
 
     }
 }
-class UI {
+class UIController {
     constructor() {
         this.grid = null;
-        this.tableElement = document.getElementById("grid");
-        this.statusElement = document.getElementById("status");
+        this.tableEl = document.getElementById('grid-table');
     }
     readInput() {
 
@@ -129,4 +137,4 @@ class UI {
     }
 }
 
-Grid.buildGrid();
+const ui = new UIController();
