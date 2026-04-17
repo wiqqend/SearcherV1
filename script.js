@@ -186,8 +186,10 @@ class UIController {
         else if (cell.isVisited) td.className = 'visited';
         else if (cell.isWall)    td.className = 'wall';
     }
-    cleargridwalls() {
-
+    clearGridWalls() {
+        this.grid.clearWalls();
+        this.grid.reset();
+        this.renderGrid();
     }
 
     addWall(x, y) {
