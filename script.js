@@ -31,9 +31,6 @@ class searchAlgorithm {
         this.pathCells = [];
   }
 
-    run() {
-
-    }
 
     reconstructPath(goalCell) {
         this.pathCells = [];
@@ -239,9 +236,6 @@ class UIController {
         }
     }
 
-    createPath(goalCell) {
-
-    }
 }
 
 const ui = new UIController();
