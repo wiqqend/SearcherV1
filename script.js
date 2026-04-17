@@ -1,5 +1,51 @@
+class Cell {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.isWall = false;
+    this.isStart = false;
+    this.isGoal = false;
+    this.isVisited = false;
+    this.isPath = false;
+    this.parent = null;
+  }
+ 
+  // Toggle cell between wall and empty
+  toggleWall() {
+    if (!this.isStart && !this.isGoal) this.isWall = !this.isWall;
+  }
+ 
+  // Reset visited/path/parent state 
+  reset() {
+    this.isVisited = false;
+    this.isPath = false;
+    this.parent = null;
+  }
+}
+class searchAlgorithm {
+    constructor(grid, startCell, goalCell) {
+        this.grid = grid;
+        this.startCell = startCell;
+        this.goalCell = goalCell;
+        this.visited = [];
+        this.pathCells = [];
+  }
 
+    run() {
 
+    }
+
+    reconstructPath(goalCell) {
+        this.pathCells = [];
+        let cur = goalCell;
+        while (cur) {
+            cur.isPath = true;
+            this.pathCells.unshift(cur);
+            cur = cur.parent;
+    }
+  }
+
+}
 
 class Grid {
     constructor(w, h) {
@@ -48,64 +94,36 @@ class Grid {
     }
 }
 
-class Cell {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.isWall = false;
-    this.isStart = false;
-    this.isGoal = false;
-    this.isVisited = false;
-    this.isPath = false;
-    this.parent = null;
-  }
- 
-  // Toggle cell between wall and empty
-  toggleWall() {
-    if (!this.isStart && !this.isGoal) this.isWall = !this.isWall;
-  }
- 
-  // Reset visited/path/parent state 
-  reset() {
-    this.isVisited = false;
-    this.isPath = false;
-    this.parent = null;
-  }
-}
-class searchAlgorithm {
-    constructor(grid, startCell, goalCell) {
-        this.grid = grid;
-        this.startCell = startCell;
-        this.goalCell = goalCell;
-        this.visited = [];
-        this.pathCells = [];
-  }
 
+class BFS extends searchAlgorithm {
     run() {
-
+        this.grid.reset();
+        const queue = [this.startCell]; // FIFO queue
+        this.startCell.isVisited = true;
+        this.visited = [];
+        let found = false;
+ 
+        while (queue.length) {
+            const cur = queue.shift(); // dequeue front
+            this.visited.push(cur);
+ 
+        if (cur === this.goalCell) {
+            this.reconstructPath(cur);
+            found = true;
+            break;
+      }
+ 
+        for (const nb of this.grid.getNeighbors(cur)) {
+            if (!nb.isVisited) {
+                nb.isVisited = true;
+                nb.parent = cur; // record how we got here
+                queue.push(nb);
+        }
+      }
     }
-
-    newpath(goalCell) {
-
-    }
-
-    newGoal(goalCell) {
-
-    }
-
-}
-
-
-class BFS extends searchAlgorithm{
-    constructor(queue = []) {
-        super(queue);
-    }
-    pathfindingBFS() {
-
-    }
-    newpath(goalCell) {
-
-    }
+ 
+    return { visitOrder: this.visited, pathCells: this.pathCells, found };
+  }
 }
 class UIController {
     constructor() {
