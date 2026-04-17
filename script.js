@@ -37,32 +37,29 @@ class Grid {
         this.cells.flat().forEach(cell => {cell.isWall = false;});
     }
 }
-class Cell{
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.isWall = false;
-        this.isStart = false;
-        this.isGoal = false;
-        this.isVisited = false;
-        this.isPath = false;
-        this.parent = null;
-        this.g = 0;
-        this.h= 0;
-
-    }
-    toggleWall() {
-        if (!this.isStart && !this.isGoal) 
-            this.isWall = !this.isWall;}
-    
-    
-    reset(){
-        this.isVisited = false;
-        this.isPath = false;
-        this.parent = null;
-        this.g = 0;
-        this.h = 0;
-    }
+class Cell {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.isWall = false;
+    this.isStart = false;
+    this.isGoal = false;
+    this.isVisited = false;
+    this.isPath = false;
+    this.parent = null;
+  }
+ 
+  // Toggle cell between wall and empty
+  toggleWall() {
+    if (!this.isStart && !this.isGoal) this.isWall = !this.isWall;
+  }
+ 
+  // Reset visited/path/parent state 
+  reset() {
+    this.isVisited = false;
+    this.isPath = false;
+    this.parent = null;
+  }
 }
 class searchAlgorithm{
     constructor(grid, startCell, goalCell, visited=[], queue=[]) {
