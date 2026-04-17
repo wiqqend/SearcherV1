@@ -9,8 +9,8 @@
   cursor: pointer;
 }
 
-td.wall    { background: #333; }
+td.wall    { background: black; }
 td.start   { background: yellow; }
 td.goal    { background: red; }
-td.visited { background: #6699ff; }
+td.visited { background: lightcyan; }
 td.path    { background: green; }
