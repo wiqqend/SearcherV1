@@ -142,6 +142,13 @@ class UIController {
             return;
         if (sx === gx && sy === gy) 
             return;
+        const old = this.grid;
+        this.grid = new Grid(w, h);
+        if (old && old.width === w && old.height === h)
+            for (let y = 0; y < h; y++)
+                for (let x = 0; x < w; x++)
+                    if (old.cells[y][x].isWall) 
+                        this.grid.cells[y][x].isWall = true;
 
         this.grid.getCell(sx, sy).isStart = true;
         this.grid.getCell(gx, gy).isGoal  = true;
@@ -171,7 +178,14 @@ class UIController {
         this.tableEl.appendChild(row);
     }
     }
-
+    applyClass(td, cell) {
+        td.className = '';
+        if      (cell.isStart)   td.className = 'start';
+        else if (cell.isGoal)    td.className = 'goal';
+        else if (cell.isPath)    td.className = 'path';
+        else if (cell.isVisited) td.className = 'visited';
+        else if (cell.isWall)    td.className = 'wall';
+    }
     cleargridwalls() {
 
     }
@@ -180,9 +194,20 @@ class UIController {
     
     }
 
-    startalgorithm() {
-
-    }
+    startAlgorithm() {
+        const { sx, sy, gx, gy } = this.readInputs();
+        const startCell = this.grid.getCell(sx, sy);
+        const goalCell  = this.grid.getCell(gx, gy);
+        if (!startCell || !goalCell) 
+            return;
+ 
+        this.grid.reset();
+ 
+        const algo = new BFS(this.grid, startCell, goalCell);
+        algo.run(); 
+    
+        this.renderGrid(); // re-render to show result instantly
+  }
 
     createPath(goalCell) {
 
