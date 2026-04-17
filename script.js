@@ -111,6 +111,16 @@ class UIController {
     constructor() {
         this.grid = null;
         this.tableEl = document.getElementById('grid-table');
+    
+    const inputIds = ['gridWidth', 'gridHeight', 'startX', 'startY', 'goalX', 'goalY'];
+    const self = this;
+    for (let i = 0; i < inputIds.length; i++) {
+        document.getElementById(inputIds[i]).addEventListener('input', function() {
+            self.makeGrid();
+    });
+    }
+    this.makeGrid();
+    
     }
     readInput() {
 
