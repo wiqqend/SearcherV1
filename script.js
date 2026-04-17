@@ -122,9 +122,16 @@ class UIController {
     this.makeGrid();
     
     }
-    readInput() {
-
-    }
+    readInputs() {
+        return {
+            w:  Math.min(parseInt(document.getElementById('gridWidth').value)  || 20, 60),
+            h:  Math.min(parseInt(document.getElementById('gridHeight').value) || 10, 40),
+            sx: parseInt(document.getElementById('startX').value) || 0,
+            sy: parseInt(document.getElementById('startY').value) || 0,
+            gx: parseInt(document.getElementById('goalX').value)  || 9,
+            gy: parseInt(document.getElementById('goalY').value)  || 9,
+            };
+  }
 
     makegrid() {
 
