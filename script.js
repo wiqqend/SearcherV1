@@ -190,8 +190,9 @@ class UIController {
 
     }
 
-    addwalls(x,y) {
-    
+    addWall(x, y) {
+        this.grid.getCell(x, y).toggleWall();
+        this.applyClass(this.tableEl.rows[y].cells[x], this.grid.getCell(x, y));
     }
 
     startAlgorithm() {
