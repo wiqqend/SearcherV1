@@ -210,7 +210,16 @@ class UIController {
         algo.run(); 
     
         this.renderGrid(); // re-render to show result instantly
-  }
+    }
+
+    highlightNeighbors(x, y) {
+        const neighbors = this.grid.getNeighbors(this.grid.getCell(x, y));
+        for (let i = 0; i < neighbors.length; i++) {
+            const nb = neighbors[i];
+        if (!nb.isStart && !nb.isGoal)
+            this.tableEl.rows[nb.y].cells[nb.x].style.background = '#ffcc00';
+        }
+    }
 
     createPath(goalCell) {
 
