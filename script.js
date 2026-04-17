@@ -133,7 +133,16 @@ class UIController {
             };
   }
 
-    makegrid() {
+    makeGrid() {
+        const { w, h, sx, sy, gx, gy } = this.readInputs();
+
+        if (sx < 0 || sx >= w || sy < 0 || sy >= h) 
+            return;
+        if (gx < 0 || gx >= w || gy < 0 || gy >= h) 
+            return;
+        if (sx === gx && sy === gy) 
+            return;
+
 
     }
 
