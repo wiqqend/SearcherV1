@@ -72,14 +72,14 @@ class Cell {
     this.parent = null;
   }
 }
-class searchAlgorithm{
-    constructor(grid, startCell, goalCell, visited=[], queue=[]) {
-        this.grid = grid;
-        this.startCell = startCell;
-        this.goalCell = goalCell;
-        this.visited = visited;
-        this.queue = queue;
-    }
+class SearchAlgorithm {
+  constructor(grid, startCell, goalCell) {
+    this.grid = grid;
+    this.startCell = startCell;
+    this.goalCell = goalCell;
+    this.visited = [];
+    this.pathCells = [];
+  }
 
     run() {
 
