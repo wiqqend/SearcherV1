@@ -156,9 +156,21 @@ class UIController {
             this.applyClass(td, this.grid.getCell(x, y));
             td.dataset.x = x;
             td.dataset.y = y;
-            
+            const self = this;
+            td.addEventListener('click', function() {
+                self.addWall(parseInt(this.dataset.x), parseInt(this.dataset.y));
+            });
+            td.addEventListener('mouseenter', function() {
+                self.highlightNeighbors(parseInt(this.dataset.x), parseInt(this.dataset.y));
+            });
+            td.addEventListener('mouseleave', function() {
+                self.renderGrid();
+            });
+            row.appendChild(td);
+        }
+        this.tableEl.appendChild(row);
     }
-}}
+    }
 
     cleargridwalls() {
 
