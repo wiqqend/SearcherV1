@@ -181,10 +181,10 @@ class UIController {
     }
     applyClass(td, cell) {
         td.className = '';
-        if      (cell.isStart)   td.className = 'start';
+        if (cell.isStart)   td.className = 'start';
         else if (cell.isGoal)    td.className = 'goal';
         else if (cell.isPath)    td.className = 'path';
-        else if (cell.isVisited) td.className = 'visited';
+        else if (cell.isVisited)    td.className = 'visited';
         else if (cell.isWall)    td.className = 'wall';
     }
     clearGridWalls() {
