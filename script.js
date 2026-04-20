@@ -12,7 +12,8 @@ class Cell {
  
   // Toggle cell between wall and empty
   toggleWall() {
-    if (!this.isStart && !this.isGoal) this.isWall = !this.isWall;
+    if (!this.isStart && !this.isGoal) 
+        this.isWall = !this.isWall;
   }
  
   // Reset visited/path/parent state 
@@ -46,17 +47,7 @@ class Grid {
         return this.cells[y][x];
   }
     
-    getNeighbors(cell) {
-        const dirs = [[0,-1],[0,1],[-1,0],[1,0]];
-        const neighbors = [];
-        for (let i = 0; i < dirs.length; i++) {
-            const neighbor = this.getCell(cell.x + dirs[i][0], cell.y + dirs[i][1]);
-        
-            if (neighbor && !neighbor.isWall) 
-            neighbors.push(neighbor);
-    }
-    return neighbors;
-  }
+    
     reset() {
         for (let y = 0; y < this.height; y++)
             for (let x = 0; x < this.width; x++)
@@ -80,6 +71,13 @@ class searchAlgorithm {
 
 
     reconstructPath(goalCell) {
+        const path = [];
+        let current = goalCell;
+        while (current) {
+            path.unshift(current);
+            current = current.parent;
+        }
+        return path;
         
   }
 
@@ -93,17 +91,16 @@ class BFS extends searchAlgorithm {
         let found = false;
  
         while (queue.length) {
+            const currentcell = queue.shift();
  
-        if (cur === this.goalCell) {
-            
+        if (currentcell === this.goalCell) {
+            break;
       }
  
-        //for () { // might need for loop?
         
-      //}
     }
  
-    return { };
+    return { visited: this.visited, path: this.reconstructPath(this.goalCell) };
   }
 }
 class UIController {
@@ -166,9 +163,7 @@ class UIController {
             td.addEventListener('click', function() {
                 self.addWall(parseInt(this.dataset.x), parseInt(this.dataset.y));
             });
-            td.addEventListener('mouseenter', function() {
-                self.highlightNeighbors(parseInt(this.dataset.x), parseInt(this.dataset.y));
-            });
+            
             td.addEventListener('mouseleave', function() {
                 self.renderGrid();
             });
@@ -197,15 +192,6 @@ class UIController {
     }
 
     startAlgorithm() {}
-
-    highlightNeighbors(x, y) {
-        const neighbors = this.grid.getNeighbors(this.grid.getCell(x, y));
-        for (let i = 0; i < neighbors.length; i++) {
-            const nb = neighbors[i];
-        if (!nb.isStart && !nb.isGoal)
-            this.tableEl.rows[nb.y].cells[nb.x].style.background = 'yellow';
-        }
-    }
 
 }
 
