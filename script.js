@@ -70,42 +70,42 @@ class searchAlgorithm { // base class for search algorithms
   }
 
 
-    reconstructPath(goalCell) { 
-        const path = [];
-        let current = goalCell;
-        while (current) {
-            path.unshift(current);
-            current = current.parent;
-        }
-        return path;
-        
-  }
-
-}
+    run(goalCell) { 
+        const path = []; 
+        let current = goalCell; 
+        while (current) { 
+            path.unshift(current); 
+            current = current.parent; 
+        } 
+        return path; 
+         
+  } 
+ 
+} 
 class BFS extends searchAlgorithm {
-    run() {
-        this.grid.reset();
-        const queue = [this.startCell]; // fifo queue ?
-        this.startCell.isVisited = true;
-        this.visited = [];
-        let found = false;
- 
-        while (queue.length) {
-            const currentcell = queue.shift();
- 
-        if (currentcell === this.goalCell) {
-            break;
-      }
-        for (const dir of [[0, -1], [1, 0], [0, 1], [-1, 0]]) {
-            const nextX = currentcell.x + dir[0];
-            const nextY = currentcell.y + dir[1];
-            const nextCell = this.grid.getCell(nextX, nextY);   
-        }
-        
-    }
- 
-    return { visited: this.visited, path: this.reconstructPath(this.goalCell) };
-  }
+    run() { 
+        this.grid.reset(); 
+        const queue = [this.startCell]; // fifo queue ? 
+        this.startCell.isVisited = true; 
+        this.visited = []; 
+        let found = false; 
+  
+        while (queue.length) { 
+            const currentcell = queue.shift(); 
+  
+        if (currentcell === this.goalCell) {  
+            break;  
+      } 
+        for (const dir of [[0, -1], [1, 0], [0, 1], [-1, 0]]) { 
+            const nextX = currentcell.x + dir[0]; 
+            const nextY = currentcell.y + dir[1]; 
+            const nextCell = this.grid.getCell(nextX, nextY);    
+        } 
+         
+    }  
+  
+    return {}; 
+  } 
 }
 class UIController {
     constructor() {
