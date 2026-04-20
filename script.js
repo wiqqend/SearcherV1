@@ -33,13 +33,7 @@ class searchAlgorithm {
 
 
     reconstructPath(goalCell) {
-        this.pathCells = [];
-        let cur = goalCell;
-        while (cur) {
-            cur.isPath = true;
-            this.pathCells.unshift(cur);
-            cur = cur.parent;
-    }
+        
   }
 
 }
@@ -95,31 +89,23 @@ class Grid {
 class BFS extends searchAlgorithm {
     run() {
         this.grid.reset();
-        const queue = [this.startCell]; // FIFO queue
+        const queue = [this.startCell]; // fifo queue ?
         this.startCell.isVisited = true;
         this.visited = [];
         let found = false;
  
         while (queue.length) {
-            const cur = queue.shift(); // dequeue front
-            this.visited.push(cur);
  
         if (cur === this.goalCell) {
-            this.reconstructPath(cur);
-            found = true;
-            break;
+            
       }
  
-        for (const nb of this.grid.getNeighbors(cur)) {
-            if (!nb.isVisited) {
-                nb.isVisited = true;
-                nb.parent = cur; // record how we got here
-                queue.push(nb);
-        }
-      }
+        //for () { // might need for loop?
+        
+      //}
     }
  
-    return { visitOrder: this.visited, pathCells: this.pathCells, found };
+    return { };
   }
 }
 class UIController {
@@ -212,27 +198,14 @@ class UIController {
         this.applyClass(this.tableEl.rows[y].cells[x], this.grid.getCell(x, y));
     }
 
-    startAlgorithm() {
-        const { sx, sy, gx, gy } = this.readInputs();
-        const startCell = this.grid.getCell(sx, sy);
-        const goalCell  = this.grid.getCell(gx, gy);
-        if (!startCell || !goalCell) 
-            return;
- 
-        this.grid.reset();
- 
-        const algo = new BFS(this.grid, startCell, goalCell);
-        algo.run(); 
-    
-        this.renderGrid(); // re-render to show result instantly
-    }
+    startAlgorithm() {}
 
     highlightNeighbors(x, y) {
         const neighbors = this.grid.getNeighbors(this.grid.getCell(x, y));
         for (let i = 0; i < neighbors.length; i++) {
             const nb = neighbors[i];
         if (!nb.isStart && !nb.isGoal)
-            this.tableEl.rows[nb.y].cells[nb.x].style.background = '#ffcc00';
+            this.tableEl.rows[nb.y].cells[nb.x].style.background = 'yellow';
         }
     }
 
