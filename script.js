@@ -10,13 +10,13 @@ class Cell {
     this.parent = null;
   }
  
-  // Toggle cell between wall and empty
+  // toggle cell between wall and empty
   toggleWall() {
     if (!this.isStart && !this.isGoal) 
         this.isWall = !this.isWall;
   }
  
-  // Reset visited/path/parent state 
+  // reset visited/path/parent state 
   reset() {
     this.isVisited = false;
     this.isPath = false;
@@ -30,7 +30,7 @@ class Grid {
         this.cells = [];
         this.buildGrid();
     }
-    buildGrid() {
+    buildGrid() { // creates the 2d array of cells
         this.cells = [];
         
         for (let y = 0; y < this.height; y++) {
@@ -41,26 +41,26 @@ class Grid {
                 }
             }
     }
-    getCell(x, y) {
+    getCell(x, y) { // returns the cell at (x, y) or null if out of bounds
         if (x < 0 || x >= this.width || y < 0 || y >= this.height) 
             return null;
         return this.cells[y][x];
   }
     
     
-    reset() {
+    reset() { // resets visited/path/parent state of all cells
         for (let y = 0; y < this.height; y++)
             for (let x = 0; x < this.width; x++)
                 this.cells[y][x].reset();
     }
-    clearWalls() {
+    clearWalls() { // removes all walls from the grid
         for (let y = 0; y < this.height; y++)
             for (let x = 0; x < this.width; x++)
                 this.cells[y][x].isWall = false;
     }
 }
 
-class searchAlgorithm {
+class searchAlgorithm { // base class for search algorithms
     constructor(grid, startCell, goalCell) {
         this.grid = grid;
         this.startCell = startCell;
@@ -70,7 +70,7 @@ class searchAlgorithm {
   }
 
 
-    reconstructPath(goalCell) {
+    reconstructPath(goalCell) { //
         const path = [];
         let current = goalCell;
         while (current) {
@@ -96,7 +96,11 @@ class BFS extends searchAlgorithm {
         if (currentcell === this.goalCell) {
             break;
       }
- 
+        for (const dir of [[0, -1], [1, 0], [0, 1], [-1, 0]]) {
+            const nextX = currentcell.x + dir[0];
+            const nextY = currentcell.y + dir[1];
+            const nextCell = this.grid.getCell(nextX, nextY);   
+        }
         
     }
  
