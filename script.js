@@ -22,22 +22,6 @@ class Cell {
     this.parent = null;
   }
 }
-class searchAlgorithm {
-    constructor(grid, startCell, goalCell) {
-        this.grid = grid;
-        this.startCell = startCell;
-        this.goalCell = goalCell;
-        this.visited = [];
-        this.pathCells = [];
-  }
-
-
-    reconstructPath(goalCell) {
-        
-  }
-
-}
-
 class Grid {
     constructor(w, h) {
         this.width = w;
@@ -85,7 +69,21 @@ class Grid {
     }
 }
 
+class searchAlgorithm {
+    constructor(grid, startCell, goalCell) {
+        this.grid = grid;
+        this.startCell = startCell;
+        this.goalCell = goalCell;
+        this.visited = [];
+        this.pathCells = [];
+  }
 
+
+    reconstructPath(goalCell) {
+        
+  }
+
+}
 class BFS extends searchAlgorithm {
     run() {
         this.grid.reset();
