@@ -45,6 +45,17 @@ class Grid {
         if (x < 0 || x >= this.width || y < 0 || y >= this.height)      // check bounds
             return null;
         return this.cells[y][x];  // return the cell at (x, y) --> opposite order because cells is an array of rows (y) which are arrays of cells (x)
+    }
+    getNeighbors(cell) {
+        const dirs = [[0,-1],[0,1],[-1,0],[1,0]];
+        const neighbors = [];
+        for (let i = 0; i < dirs.length; i++) {
+            const neighbor = this.getCell(cell.x + dirs[i][0], cell.y + dirs[i][1]);
+        
+            if (neighbor && !neighbor.isWall) 
+            neighbors.push(neighbor);
+    }
+    return neighbors;
   }
     
     
@@ -71,15 +82,7 @@ class searchAlgorithm { // base class for search algorithms
 
 
     run(goalCell) { 
-        const path = []; 
-        let current = goalCell; 
-        while (current) { 
-            path.unshift(current); 
-            current = current.parent; 
-        } 
-        return path; 
-         
-  } 
+    }
  
 } 
 class BFS extends searchAlgorithm {
@@ -92,15 +95,7 @@ class BFS extends searchAlgorithm {
   
         while (queue.length) { 
             const currentcell = queue.shift(); 
-  
-        if (currentcell === this.goalCell) {  
-            break;  
-      } 
-        for (const dir of [[0, -1], [1, 0], [0, 1], [-1, 0]]) { 
-            const nextX = currentcell.x + dir[0]; 
-            const nextY = currentcell.y + dir[1]; 
-            const nextCell = this.grid.getCell(nextX, nextY);    
-        } 
+
          
     }  
   
