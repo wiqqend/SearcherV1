@@ -81,10 +81,23 @@ class searchAlgorithm { // base class for search algorithms
   }
 
 
-    run(goalCell) { 
+    reconstructPath(goalCell) { 
+        const path = [];
+        let currentcell = this.startCell;
+        while (currentcell !== goalCell) {
+            path.push(currentcell);
+            currentcell = currentcell.parent;
+        }
+        path.push(goalCell);
+        return path.reverse(); // reverse the path to get it from start to goal
+    
+            
+            
+
+        }
+
     }
  
-} 
 class BFS extends searchAlgorithm {
     run() { 
         this.grid.reset(); 
@@ -95,13 +108,25 @@ class BFS extends searchAlgorithm {
   
         while (queue.length) { 
             const currentcell = queue.shift(); 
+            this.visited.push(currentcell); 
+  
+            if (currentcell === this.goalCell) { 
+                found = true; 
+                break; 
+            }
+        for (const neighbor of this.grid.getNeighbors(currentcell)) { 
+            if (!neighbor.isVisited) { 
+                neighbor.isVisited = true; 
+                neighbor.parent = currentcell; 
+                queue.push(neighbor); 
+            }   
 
          
     }  
   
     return {}; 
   } 
-}
+}}
 class UIController {
     constructor() {
         this.grid = null;
@@ -187,7 +212,9 @@ class UIController {
         this.applyClass(this.tableEl.rows[y].cells[x], this.grid.getCell(x, y));
     }
 
-    startAlgorithm() {}
+    startAlgorithm() {
+        
+    }
 
 }
 
