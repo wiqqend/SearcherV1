@@ -199,7 +199,7 @@ class UIController {
 
     startAlgorithm() {
         const {sx,sy,gx,gy} = this.readInputs()
-        const startcell = this.grid.getCell(sx,sy)
+        const startCell = this.grid.getCell(sx,sy)
         const goalCell = this.grid.getCell(gx,gy)
 
         const attempt = new BFS(this.grid, startCell, goalCell)
