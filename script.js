@@ -81,52 +81,37 @@ class searchAlgorithm { // base class for search algorithms
   }
 
 
-    reconstructPath(goalCell) { 
-        const path = [];
-        let currentcell = this.startCell;
-        while (currentcell !== goalCell) {
-            path.push(currentcell);
-            currentcell = currentcell.parent;
-        }
-        path.push(goalCell);
-        return path.reverse(); // reverse the path to get it from start to goal
-    
-            
-            
-
-        }
-
+    reconstructPath(goalCell) {
+	let currentcell = goalCell;
+	while (currentcell) {
+		currentcell.isPath = true;
+		currentcell = currentcell.parent;
+	}}
     }
  
 class BFS extends searchAlgorithm {
-    run() { 
-        this.grid.reset(); 
-        const queue = [this.startCell]; // fifo queue ? 
-        this.startCell.isVisited = true; 
-        this.visited = []; 
-        let found = false; 
-  
-        while (queue.length) { 
-            const currentcell = queue.shift(); 
-            this.visited.push(currentcell); 
-  
-            if (currentcell === this.goalCell) { 
-                found = true; 
-                break; 
-            }
-        for (const neighbor of this.grid.getNeighbors(currentcell)) { 
-            if (!neighbor.isVisited) { 
-                neighbor.isVisited = true; 
-                neighbor.parent = currentcell; 
-                queue.push(neighbor); 
-            }   
+	run() {
+		this.grid.reset();
+		const queue = [this.startCell]; // fifo queue
+		this.startCell.isVisited = true;
 
-         
-    }  
-  
-    return {}; 
-  } 
-}}
+		while (queue.length) {
+			const currentcell = queue.shift();
+
+			if (currentcell === this.goalCell) {
+				break;
+			}
+
+			for (const neighbor of this.grid.getNeighbors(currentcell)) {
+				if (!neighbor.isVisited) {
+					neighbor.isVisited = true;
+					neighbor.parent = currentcell;
+					queue.push(neighbor);
+				}
+			}
+		}
+	}
+}
 class UIController {
     constructor() {
         this.grid = null;
@@ -213,7 +198,14 @@ class UIController {
     }
 
     startAlgorithm() {
-        
+        const {sx,sy,gx,gy} = this.readInputs()
+        const startcell = this.grid.getCell(sx,sy)
+        const goalCell = this.grid.getCell(gx,gy)
+
+        const attempt = new BFS(this.grid, startCell, goalCell)
+        attempt.run()
+        attempt.reconstructPath(goalCell)
+        this.renderGrid()
     }
 
 }
