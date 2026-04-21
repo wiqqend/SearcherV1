@@ -99,34 +99,28 @@ class searchAlgorithm { // base class for search algorithms
     }
  
 class BFS extends searchAlgorithm {
-    run() { 
-        this.grid.reset(); 
-        const queue = [this.startCell]; // fifo queue ? 
-        this.startCell.isVisited = true; 
-        this.visited = []; 
-        let found = false; 
-  
-        while (queue.length) { 
-            const currentcell = queue.shift(); 
-            this.visited.push(currentcell); 
-  
-            if (currentcell === this.goalCell) { 
-                found = true; 
-                break; 
-            }
-        for (const neighbor of this.grid.getNeighbors(currentcell)) { 
-            if (!neighbor.isVisited) { 
-                neighbor.isVisited = true; 
-                neighbor.parent = currentcell; 
-                queue.push(neighbor); 
-            }   
+	run() {
+		this.grid.reset();
+		const queue = [this.startCell]; // fifo queue
+		this.startCell.isVisited = true;
 
-         
-    }  
-  
-    return {}; 
-  } 
-}}
+		while (queue.length) {
+			const currentcell = queue.shift();
+
+			if (currentcell === this.goalCell) {
+				break;
+			}
+
+			for (const neighbor of this.grid.getNeighbors(currentcell)) {
+				if (!neighbor.isVisited) {
+					neighbor.isVisited = true;
+					neighbor.parent = currentcell;
+					queue.push(neighbor);
+				}
+			}
+		}
+	}
+}
 class UIController {
     constructor() {
         this.grid = null;
