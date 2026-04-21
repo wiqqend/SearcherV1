@@ -81,21 +81,12 @@ class searchAlgorithm { // base class for search algorithms
   }
 
 
-    reconstructPath(goalCell) { 
-        const path = [];
-        let currentcell = this.startCell;
-        while (currentcell !== goalCell) {
-            path.push(currentcell);
-            currentcell = currentcell.parent;
-        }
-        path.push(goalCell);
-        return path.reverse(); // reverse the path to get it from start to goal
-    
-            
-            
-
-        }
-
+    reconstructPath(goalCell) {
+	let currentcell = goalCell;
+	while (currentcell) {
+		currentcell.isPath = true;
+		currentcell = currentcell.parent;
+	}}
     }
  
 class BFS extends searchAlgorithm {
