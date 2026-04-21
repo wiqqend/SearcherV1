@@ -197,12 +197,12 @@ class UIController {
         this.applyClass(this.tableEl.rows[y].cells[x], this.grid.getCell(x, y));
     }
 
-    startAlgorithm() {
+    startAlgorithm() { // read the input values for start/goal x and ys 
         const {sx,sy,gx,gy} = this.readInputs()
         const startCell = this.grid.getCell(sx,sy)
         const goalCell = this.grid.getCell(gx,gy)
 
-        const attempt = new BFS(this.grid, startCell, goalCell)
+        const attempt = new BFS(this.grid, startCell, goalCell) // makes a new object of bfs class and runs the functions to display the algorithm and results are updated to the screen.
         attempt.run()
         attempt.reconstructPath(goalCell)
         this.renderGrid()
