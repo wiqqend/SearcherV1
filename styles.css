@@ -1,7 +1,3 @@
-#grid-table {
-  border-collapse: collapse;
-  margin-bottom: 12px;
-}
 #grid-table td {
   width: 25px;
   height: 25px;

@@ -44,7 +44,10 @@ class Grid {
     getCell(x, y) { // returns the cell at (x, y) or null if out of bounds
         if (x < 0 || x >= this.width || y < 0 || y >= this.height)      // check bounds
             return null;
-        return this.cells[y][x];  // return the cell at (x, y) --> opposite order because cells is an array of rows (y) which are arrays of cells (x)
+        if (this.cells[y][x]) {
+            return this.cells[y][x];
+        }
+        return null;  // return null if cell is out of bounds
     }
     getNeighbors(cell) {
         const dirs = [[0,-1],[0,1],[-1,0],[1,0]];
@@ -131,10 +134,10 @@ class UIController {
         return {
             w:  Math.min(parseInt(document.getElementById('gridWidth').value)),
             h:  Math.min(parseInt(document.getElementById('gridHeight').value)),
-            sx: parseInt(document.getElementById('startX').value),
-            sy: parseInt(document.getElementById('startY').value),
-            gx: parseInt(document.getElementById('goalX').value),
-            gy: parseInt(document.getElementById('goalY').value)
+            sx: parseInt(document.getElementById('startX').value) -1,
+            sy: parseInt(document.getElementById('startY').value) -1,
+            gx: parseInt(document.getElementById('goalX').value) -1,
+            gy: parseInt(document.getElementById('goalY').value) -1
             };
   }
 
@@ -153,8 +156,7 @@ class UIController {
             for (let y = 0; y < h; y++) 
                 for (let x = 0; x < w; x++)
                     if (old.cells[y][x].isWall) // if the cell was a wall in the old grid, make it a wall in the new grid 
-                        this.grid.cells[y][x].isWall = true;
-
+                        this.grid.cells[y][x].isWall = true;          
         this.grid.getCell(sx, sy).isStart = true; // set the start cell based on input values
         this.grid.getCell(gx, gy).isGoal  = true; // set the goal cell based on input values
         this.renderGrid();    //render in ui
