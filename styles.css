@@ -31,3 +31,8 @@ p {
   width: 300px;
   align-items: center;
 }
+.controls label {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
