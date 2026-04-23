@@ -143,13 +143,6 @@ class UIController {
 
     makeGrid() {
         const { w, h, sx, sy, gx, gy } = this.readInputs(); // read input values for grid dimensions and start/goal positions
-
-        if (sx < 0 || sx >= w || sy < 0 || sy >= h) // validate start position
-            return;
-        if (gx < 0 || gx >= w || gy < 0 || gy >= h) // validate goal position
-            return;
-        if (sx === gx && sy === gy) 
-            return;
         const old = this.grid;
         this.grid = new Grid(w, h); //
         if (old && old.width === w && old.height === h) // if grid dimensions are unchanged, copy wall states from old grid to new grid
