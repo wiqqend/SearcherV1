@@ -6,10 +6,10 @@
 }
 
 td.wall    { background: black; }
-td.start   { background: yellow; }
-td.goal    { background: red; }
-td.visited { background: lightcyan; }
-td.path    { background: green; }
+td.start   { background: red; }
+td.goal    { background: green; }
+td.visited { background: lavenderblush; }
+td.path    { background: lightgoldenrodyellow; }
 
 body {
   font-family: Arial, sans-serif;
